@@ -3,7 +3,12 @@ def make_division_by(n):
        of an x number by n 
     """
     # You have to code here!
-    pass
+    def division(x):
+        assert type(n) == int, 'Solo puedes ingresar enteros'
+        assert n > 0, 'El divisor debe ser mayor a 0'
+        assert type(x) == int, 'Solo puedes ingresar enteros'
+        return x / n
+    return division
 
 
 def run():
@@ -21,8 +26,30 @@ if __name__ == '__main__':
     import unittest
 
     class ClosureSuite(unittest.TestCase):
+
+        def setUp(self):
+            self.testing = {
+                6: [18, 3],
+                20: [100, 5],
+                3: [54, 18],
+                2: [8, 4],
+                5: [10, 2],
+                2: [6, 3],
+            }
+
         def test_closure_make_division_by(self):
             # Make the closure test here
-            pass
+            for key, value in self.testing.items():
+                division_by_n = make_division_by(value[1])
+                # print(f'{key}, {value[1}, {value[0]}, {division_by_n}, {division_by_n(value[0])}')
+                self.assertEqual(key, division_by_n(value[0]))
+                del(division_by_n)
+                
+        def tearDown(self):
+            # Delete the needed values for the tests
+            del(self.testing)
+            print('Result: ')
+            run()
+            
 
-    run()
+    unittest.main()
